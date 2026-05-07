@@ -1,0 +1,232 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #f0c040;
+  text-shadow: 0 2px 12px #f0c04066;
+}
+
+.hidden { display: none !important; }
+
+/* ── Lobby ── */
+#lobby, #waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lobby-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 260px;
+}
+
+.divider {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.join-row {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+input#room-input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #444;
+  background: #16213e;
+  color: #eee;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input#room-input:focus { border-color: #f0c040; }
+
+button {
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  background: #f0c040;
+  color: #1a1a2e;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+button:hover { background: #ffd966; }
+button:active { transform: scale(0.97); }
+
+#btn-create { width: 100%; }
+
+.error { color: #ff6b6b; font-size: 0.9rem; min-height: 1.2em; }
+.muted { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+
+/* ── Waiting ── */
+#room-code-display {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: #f0c040;
+  background: #16213e;
+  border: 2px solid #f0c040;
+  border-radius: 12px;
+  padding: 0.4rem 1.2rem;
+  margin: 0.5rem 0;
+}
+
+/* ── Game ── */
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#status-bar {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.6em;
+  text-align: center;
+}
+
+#status-text .dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+#board-wrap {
+  position: relative;
+  user-select: none;
+}
+
+/* Invisible click targets above each column */
+#column-targets {
+  display: flex;
+  position: absolute;
+  top: -36px;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  z-index: 10;
+}
+
+.col-target {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.col-target .arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid transparent;
+  transition: border-top-color 0.15s;
+}
+
+.col-target.hovered .arrow { border-top-color: #f0c040; }
+
+#board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  background: #0a3fa8;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 0 8px 40px #0003, 0 2px 0 #0a2d7a inset;
+}
+
+.cell {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  box-shadow: 0 4px 10px #0005 inset;
+  transition: background 0.12s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell.red   { background: #e84040; box-shadow: 0 0 12px #e8404088 inset, 0 3px 8px #0006; }
+.cell.yellow { background: #f0c040; box-shadow: 0 0 12px #f0c04088 inset, 0 3px 8px #0006; }
+
+.cell.preview-red    { background: #e8404044; }
+.cell.preview-yellow { background: #f0c04044; }
+
+.cell.winning {
+  animation: pulse 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.5) drop-shadow(0 0 8px white); }
+}
+
+/* Drop animation */
+.cell.drop {
+  animation: drop 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@keyframes drop {
+  from { transform: scaleY(0.5); opacity: 0.4; }
+  to   { transform: scaleY(1);   opacity: 1; }
+}
+
+/* ── Game over banner ── */
+#game-over-banner {
+  background: #16213e;
+  border: 2px solid #f0c040;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#game-over-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+#room-label { font-size: 0.8rem; }
+
+@media (max-width: 520px) {
+  .cell { width: 44px; height: 44px; }
+  #board { gap: 4px; padding: 7px; }
+  h1 { font-size: 1.6rem; }
+}
