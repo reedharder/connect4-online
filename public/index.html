@@ -7,30 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Lobby -->
-  <div id="lobby">
-    <h1>Connect 4</h1>
-    <div class="lobby-buttons">
-      <button id="btn-create">Create Game</button>
-      <div class="divider">or</div>
-      <div class="join-row">
-        <input id="room-input" type="text" maxlength="4" placeholder="Room code" autocomplete="off" />
-        <button id="btn-join">Join</button>
-      </div>
-    </div>
-    <p id="lobby-error" class="error"></p>
-  </div>
-
-  <!-- Waiting room -->
-  <div id="waiting" class="hidden">
-    <h1>Connect 4</h1>
-    <p>Share this code with your opponent:</p>
-    <div id="room-code-display"></div>
-    <p class="muted">Waiting for player 2 to join…</p>
-  </div>
-
-  <!-- Game -->
-  <div id="game" class="hidden">
+  <div id="game">
     <h1>Connect 4</h1>
     <div id="status-bar">
       <span id="status-text"></span>
@@ -41,13 +18,10 @@
     </div>
     <div id="game-over-banner" class="hidden">
       <p id="game-over-text"></p>
-      <button id="btn-rematch">Rematch</button>
+      <button id="btn-play-again">Play Again</button>
     </div>
-    <p id="rematch-waiting" class="hidden muted">Waiting for opponent to accept rematch…</p>
-    <p id="room-label" class="muted"></p>
   </div>
 
-  <script src="/socket.io/socket.io.js"></script>
   <script src="game.js"></script>
 </body>
 </html>

@@ -22,50 +22,6 @@ h1 {
 
 .hidden { display: none !important; }
 
-/* ── Lobby ── */
-#lobby, #waiting {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.lobby-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  width: 260px;
-}
-
-.divider {
-  color: #888;
-  font-size: 0.85rem;
-}
-
-.join-row {
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-input#room-input {
-  flex: 1;
-  padding: 0.6rem 0.8rem;
-  border-radius: 8px;
-  border: 2px solid #444;
-  background: #16213e;
-  color: #eee;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-align: center;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-input#room-input:focus { border-color: #f0c040; }
-
 button {
   padding: 0.65rem 1.4rem;
   border-radius: 8px;
@@ -80,24 +36,6 @@ button {
 
 button:hover { background: #ffd966; }
 button:active { transform: scale(0.97); }
-
-#btn-create { width: 100%; }
-
-.error { color: #ff6b6b; font-size: 0.9rem; min-height: 1.2em; }
-.muted { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
-
-/* ── Waiting ── */
-#room-code-display {
-  font-size: 3rem;
-  font-weight: 900;
-  letter-spacing: 10px;
-  color: #f0c040;
-  background: #16213e;
-  border: 2px solid #f0c040;
-  border-radius: 12px;
-  padding: 0.4rem 1.2rem;
-  margin: 0.5rem 0;
-}
 
 /* ── Game ── */
 #game {
@@ -128,7 +66,6 @@ button:active { transform: scale(0.97); }
   user-select: none;
 }
 
-/* Invisible click targets above each column */
 #column-targets {
   display: flex;
   position: absolute;
@@ -176,11 +113,9 @@ button:active { transform: scale(0.97); }
   background: #1a1a2e;
   box-shadow: 0 4px 10px #0005 inset;
   transition: background 0.12s;
-  position: relative;
-  overflow: hidden;
 }
 
-.cell.red   { background: #e84040; box-shadow: 0 0 12px #e8404088 inset, 0 3px 8px #0006; }
+.cell.red    { background: #e84040; box-shadow: 0 0 12px #e8404088 inset, 0 3px 8px #0006; }
 .cell.yellow { background: #f0c040; box-shadow: 0 0 12px #f0c04088 inset, 0 3px 8px #0006; }
 
 .cell.preview-red    { background: #e8404044; }
@@ -195,7 +130,6 @@ button:active { transform: scale(0.97); }
   to   { filter: brightness(1.5) drop-shadow(0 0 8px white); }
 }
 
-/* Drop animation */
 .cell.drop {
   animation: drop 0.25s cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -222,8 +156,6 @@ button:active { transform: scale(0.97); }
   font-size: 1.3rem;
   font-weight: 700;
 }
-
-#room-label { font-size: 0.8rem; }
 
 @media (max-width: 520px) {
   .cell { width: 44px; height: 44px; }
